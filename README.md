@@ -9,17 +9,8 @@ Live prices, 7-day history charts, and a searchable coin watchlist.
 
 ## Screenshots
 
-### Watchlist
-![Watchlist](.github/screenshots/watchlist.png)
-*Live prices with 60-second auto-refresh and green/red 24h change indicators*
-
-### Price History Chart
-![Chart](.github/screenshots/chart.png)
+![Watchlist](./screenshots/home.png)
 *7-day price history with dynamic green/red coloring based on price direction*
-
-### Search
-![Search](.github/screenshots/search.png)
-*Debounced search — waits 400ms after typing before calling the API*
 
 ---
 

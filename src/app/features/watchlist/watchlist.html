@@ -1,0 +1,55 @@
+<div class="page">
+  <div class="page-header">
+    <div>
+      <h1>Watchlist</h1>
+      <p class="subtitle">
+        @if (lastUpdated()) {
+          Updated {{ lastUpdated() | date: 'h:mm:ss a' }}
+        } @else {
+          Loading prices...
+        }
+      </p>
+    </div>
+    <div class="refresh-indicator" [class.active]="!loading()">
+      <span class="dot"></span>
+      {{ loading() ? 'Updating...' : 'Live' }}
+    </div>
+  </div>
+
+  <!-- error state -->
+  @if (error()) {
+    <div class="error-banner">
+      <mat-icon>error_outline</mat-icon>
+      {{ error() }}
+    </div>
+  }
+
+  <!-- chart panel — shown when a coin is selected -->
+  @if (selectedCoinId(); as coinId) {
+    <div class="chart-panel">
+      <app-coin-chart
+        [coinId]="coinId"
+        (closed)="selectedCoinId.set(null)"
+      />
+    </div>
+  }
+
+  <!-- coin grid -->
+  <div class="coin-grid">
+    @if (loading() && coins().length === 0) {
+      <!-- show skeletons only on first load — not on refresh -->
+      @for (s of skeletons; track $index) {
+        <app-coin-skeleton />
+      }
+    } @else {
+      @for (coin of coins(); track coin.id) {
+        <app-coin-card
+          [coin]="coin"
+          [isWatched]="true"
+          (chartRequested)="openChart($event)"
+          (watchToggled)="toggleWatch($event)"
+        />
+      }
+    }
+  </div>
+</div>

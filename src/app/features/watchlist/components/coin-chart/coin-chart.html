@@ -1,0 +1,58 @@
+<div class="chart-container">
+  <div class="chart-header">
+    <div class="coin-meta">
+      @if (coinInfo()) {
+        <img [src]="coinInfo()!.image" [alt]="coinInfo()!.name" class="coin-logo" />
+        <div>
+          <div class="coin-name">{{ coinInfo()!.name }}</div>
+          <div class="coin-price">
+            {{ coinInfo()!.current_price | currency: 'USD' : 'symbol' : '1.0-2' }}
+            <span
+              class="change"
+              [ngClass]="coinInfo()!.price_change_percentage_24h >= 0 ? 'positive' : 'negative'">
+              {{ coinInfo()!.price_change_percentage_24h | number: '1.1-2' }}%
+            </span>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="chart-controls">
+      <div class="day-selector">
+        @for (d of [7, 14, 30]; track d) {
+          <button
+            class="day-btn"
+            [class.active]="selectedDays() === d"
+            (click)="selectDays(d)">
+            {{ d }}d
+          </button>
+        }
+      </div>
+
+      <button class="close-btn" (click)="closed.emit()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="chart-area">
+    @if (loading()) {
+      <div class="chart-loading">
+        <div class="spinner"></div>
+        <span>Loading chart...</span>
+      </div>
+    } @else if (error()) {
+      <div class="chart-error">
+        <mat-icon>error_outline</mat-icon>
+        {{ error() }}
+      </div>
+    } @else {
+      <canvas
+        baseChart
+        [data]="chartData()"
+        [options]="chartOptions"
+        type="line"></canvas>
+    }
+  </div>
+
+</div>

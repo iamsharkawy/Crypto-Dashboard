@@ -1,0 +1,53 @@
+<div class="card" (click)="chartRequested.emit(coin().id)">
+  <div class="card-top">
+    <div class="coin-info">
+      <img [src]="coin().image" [alt]="coin().name" class="coin-logo" />
+      <div>
+        <div class="coin-name">{{ coin().name }}</div>
+        <div class="coin-symbol">{{ coin().symbol | uppercase }}</div>
+      </div>
+    </div>
+    <button
+      class="watch-btn"
+      [class.watched]="isWatched()"
+      (click)="$event.stopPropagation(); watchToggled.emit(coin().id)"
+      [title]="isWatched() ? 'Remove from watchlist' : 'Add to watchlist'">
+      <mat-icon>{{ isWatched() ? 'star' : 'star_border' }}</mat-icon>
+    </button>
+  </div>
+
+  <div class="price">
+    {{ coin().current_price | currency: 'USD' : 'symbol' : '1.0-2' }}
+  </div>
+
+  <div class="stats">
+    <div class="change" [ngClass]="coin().price_change_percentage_24h >= 0 ? 'positive' : 'negative'">
+      <mat-icon>
+        {{ coin().price_change_percentage_24h >= 0 ? 'arrow_drop_up' : 'arrow_drop_down' }}
+      </mat-icon>
+      {{ coin().price_change_percentage_24h | number: '1.1-2' }}%
+    </div>
+    <div class="volume">
+      Vol: {{ coin().total_volume | currency: 'USD' : 'symbol' : '1.0-0' }}
+    </div>
+  </div>
+
+  <div class="high-low">
+    <span class="hl-item">
+      <span class="hl-label">24h H</span>
+      <span class="hl-value positive">
+        {{ coin().high_24h | currency: 'USD' : 'symbol' : '1.0-2' }}
+      </span>
+    </span>
+    <span class="hl-item">
+      <span class="hl-label">24h L</span>
+      <span class="hl-value negative">
+        {{ coin().low_24h | currency: 'USD' : 'symbol' : '1.0-2' }}
+      </span>
+    </span>
+  </div>
+
+  <div class="chart-hint">
+    <mat-icon>bar_chart</mat-icon> Click to view chart
+  </div>
+</div>

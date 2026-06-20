@@ -1,0 +1,80 @@
+.result-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: #13131f;
+  border: 1px solid #1e1e2e;
+  border-radius: 12px;
+  transition: border-color 0.15s;
+
+  &:hover { border-color: #2a2a3e; }
+}
+
+.coin-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.coin-thumb {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  // fallback background if image fails to load
+  background: #1e1e2e;
+}
+
+.coin-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.coin-symbol {
+  font-size: 12px;
+  color: #555;
+  margin-top: 2px;
+}
+
+.watch-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid #1e1e2e;
+  background: none;
+  color: #555;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+
+  mat-icon { font-size: 18px; height: 18px; width: 18px; }
+
+  &:hover {
+    border-color: #7c6af7;
+    color: #7c6af7;
+  }
+
+  &.watched {
+    background: rgba(245, 197, 24, 0.08);
+    border-color: rgba(245, 197, 24, 0.3);
+    color: #f5c518;
+  }
+}
+
+.coin-thumb-fallback {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #1e1e2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #7c6af7;
+  flex-shrink: 0;
+}

@@ -1,0 +1,21 @@
+<div class="result-card">
+  <div class="coin-info">
+    <div class="coin-thumb-fallback">
+      {{ coin().symbol[0] | uppercase }}
+    </div>
+    <div>
+      <div class="coin-name">{{ coin().name }}</div>
+      <div class="coin-symbol">{{ coin().symbol | uppercase }}</div>
+    </div>
+  </div>
+
+  <button
+    class="watch-btn"
+    [class.watched]="isWatched()"
+    (click)="isWatched()
+      ? removeRequested.emit(coin().id)
+      : addRequested.emit(coin().id)">
+    <mat-icon>{{ isWatched() ? 'star' : 'star_border' }}</mat-icon>
+    {{ isWatched() ? 'Watching' : 'Add to watchlist' }}
+  </button>
+</div>

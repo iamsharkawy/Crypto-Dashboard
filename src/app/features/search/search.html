@@ -1,0 +1,72 @@
+<div class="page">
+  <div class="page-header">
+    <h1>Search</h1>
+    <p class="subtitle">Find and add coins to your watchlist</p>
+  </div>
+
+  <!-- search input -->
+  <div class="search-box">
+    <mat-icon class="search-icon">search</mat-icon>
+    <input
+      class="search-input"
+      type="text"
+      placeholder="Search coins — e.g. Bitcoin, Ethereum, Solana..."
+      [value]="query()"
+      (input)="onInput($any($event.target).value)"
+      autocomplete="off"
+    />
+    @if (query()) {
+      <button class="clear-btn" (click)="clearSearch()">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
+  </div>
+
+  <!-- loading state -->
+  @if (loading()) {
+    <div class="state-row">
+      <div class="spinner"></div>
+      <span>Searching...</span>
+    </div>
+  }
+
+  <!-- error state -->
+  @if (error()) {
+    <div class="error-banner">
+      <mat-icon>error_outline</mat-icon>
+      {{ error() }}
+    </div>
+  }
+  @if (results().length > 0) {
+    <div class="results-header">
+      {{ results().length }} results for "{{ query() }}"
+    </div>
+    <div class="results-list">
+      @for (coin of results(); track coin.id) {
+        <app-search-result-card
+          [coin]="coin"
+          [isWatched]="isWatched(coin.id)"
+          (addRequested)="addToWatchlist($event)"
+          (removeRequested)="removeFromWatchlist($event)"
+        />
+      }
+    </div>
+  }
+
+  <!-- empty state — only after a real search -->
+  @if (hasSearched() && !loading() && results().length === 0 && !error()) {
+    <div class="empty-state">
+      <mat-icon>search_off</mat-icon>
+      <p>No coins found for "{{ query() }}"</p>
+      <span>Try a different name or symbol</span>
+    </div>
+  }
+
+  <!-- initial state — before any search -->
+  @if (!hasSearched() && !loading() && !query()) {
+    <div class="hint-state">
+      <mat-icon>tips_and_updates</mat-icon>
+      <p>Type at least 2 characters to search</p>
+    </div>
+  }
+</div>

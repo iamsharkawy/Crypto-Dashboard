@@ -1,0 +1,30 @@
+<div class="shell">
+  <header class="mobile-header">
+    <span class="logo">📈 CryptoDash</span>
+    <button class="menu-btn" (click)="toggleMenu()">
+      <mat-icon>{{ menuOpen() ? 'close' : 'menu' }}</mat-icon>
+    </button>
+  </header>
+
+  @if (menuOpen()) {
+    <div class="overlay" (click)="closeMenu()"></div>
+  }
+
+  <aside class="sidebar" [class.open]="menuOpen()">
+    <div class="logo desktop-only">📈 CryptoDash</div>
+    <nav>
+      <a routerLink="/watchlist" routerLinkActive="active"
+         class="nav-item" (click)="closeMenu()">
+        <mat-icon>star</mat-icon> Watchlist
+      </a>
+      <a routerLink="/search" routerLinkActive="active"
+         class="nav-item" (click)="closeMenu()">
+        <mat-icon>search</mat-icon> Search
+      </a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>

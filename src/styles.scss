@@ -1,0 +1,35 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  background: #080810;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Scrollbar
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #1e1e2e; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #2a2a3e; }
+
+// Material dialog dark mode override
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: #13131f;
+  --mdc-dialog-container-shape: 12px;
+}
+
+// Prevent white flash on Material components in dark theme
+.mat-mdc-form-field {
+  --mdc-outlined-text-field-outline-color: #1e1e2e;
+  --mdc-outlined-text-field-label-text-color: #555;
+  --mdc-outlined-text-field-input-text-color: #fff;
+}

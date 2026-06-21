@@ -3,7 +3,7 @@
 A real-time cryptocurrency price dashboard built with **Angular 21** and **RxJS**.
 Live prices, 7-day history charts, and a searchable coin watchlist.
 
-🔗 **[Live Demo](YOUR_VERCEL_URL_HERE)**
+🔗 **[Live Demo](https://crypto-dashboard-pink-iota.vercel.app/watchlist)**
 
 ---
 
